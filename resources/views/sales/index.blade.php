@@ -10,9 +10,22 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Ventas</div>
                 <div class="panel-body">
+                    <strong style="float:right;">
+                        Total Ventas: 
+                        <span class='usd-importe'>
+                               {{$total}} $
+                        </span>
+                    </strong><br>
+                    <strong style="float:right;">
+                        Ganancia: 
+                        <span class='usd-importe'>
+                            {{$profit}} $
+                        </span>
+                    </strong>
                     <table class="table table-responsive table-striped data-table">
                         <thead>
-                            <th>ID</th>
+                            <th>ID</th>                            
+                            <th>Tipo</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
                             <th>Precio</th>
@@ -22,6 +35,7 @@
                             @foreach($sales as $sale)
                             <tr data-id="{{ $sale->id }}">
                                 <td>{{ $sale->id }}</td>
+                                <td>{{ $sale->type }}</td>
                                 <td>{{ $sale->name }}</td>
                                 <td>{{ $sale->description }}</td>
                                 <td>{{ $sale->price }}</td>

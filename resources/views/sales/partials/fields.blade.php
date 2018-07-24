@@ -1,4 +1,4 @@
-{!! Field::text('type', null, [isset($disable) ? 'disabled' : '']) !!}
+{!! Field::select('type', $types, isset($sale) ? $sale->type : null, ['empty' => '-- Seleccione --', 'required' => true,'class'=>'form-control select-options']) !!}
 {!! Field::text('name', null, [isset($disable) ? 'disabled' : '']) !!}
 {!! Field::textarea('description', null, [isset($disable) ? 'disabled' : '']) !!}
 {!! Field::number('price', null, [isset($disable) ? 'disabled' : '']) !!}

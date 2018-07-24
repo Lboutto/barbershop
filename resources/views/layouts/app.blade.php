@@ -33,8 +33,6 @@
   <!-- Estilos -->
   <link rel="stylesheet" type="text/css" href="{{asset('css/back/estilos.css')}}">
 
-  <!-- Estilos del FancyProductDesigner -->
-  <link href="{{asset('/vendor/fancy-product-designer/css/FancyProductDesigner-all.min.css')}}" rel="stylesheet">
   
   <!-- Chosen -->
   <link  rel="stylesheet" type="text/css"  href="{{asset('plugins/chosen/chosen.min.css')}}">
@@ -103,8 +101,6 @@
 
       <!--JS DE FancyProductDesigner-->
       <script src="{{asset('js/front/jquery-ui.min.js')}}"></script>
-      <script src="{{asset('vendor/fancy-product-designer/js/fabric.min.js')}}"></script>
-      <script src="{{asset('vendor/fancy-product-designer/js/FancyProductDesigner-all.min.js')}}"></script>
       
       <!-- ESTILOS PROPIOS  -->
       <script src="{{asset('js/estilos.js')}}"></script>

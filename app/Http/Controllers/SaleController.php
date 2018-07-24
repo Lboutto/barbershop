@@ -21,9 +21,45 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sales = $this->sale->get();
+        if (Auth::user()->hasrole('administrator')) {
+            $sales    = $this->sale->get();
+            $products = $this->sale->where('type', 'producto')->get();
+            $services = $this->sale->where('type', 'servicio')->get();
+        }
+        else{
+            $sales    = $this->sale->where('worker_id', Auth::user()->id)->get();
+            $products = $this->sale->where('worker_id', Auth::user()->id)->where('type', 'producto')->get();
+            $services = $this->sale->where('worker_id', Auth::user()->id)->where('type', 'servicio')->get();
+        }
+        
+        $total = 0.00;
+        $totalp = 0.00;
+        $totals = 0.00;
 
-        return view('sales.index', compact('sales'));
+        foreach ($sales as $sale) {
+            $v1 = $sale->price;
+            $total += $v1;
+        }
+
+        foreach ($products as $product) {
+            $v2 = $product->price;
+            $totalp += $v2; 
+        }
+
+        foreach ($services as $service) {
+            $v3 = $service->price;
+            $totals += $v3; 
+        }
+
+        if (Auth::user()->hasrole('administrator')) {
+            $serv = ($totals*60)/100;
+            $profit = $totalp + $serv;
+        }
+        else{
+            $profit = ($totals*40)/100;
+        }
+
+        return view('sales.index', compact('sales','total', 'profit'));
     }
 
     /**
@@ -33,7 +69,12 @@ class SaleController extends Controller
      */
     public function create()
     {
-        return view('sales.create');
+        $types = [
+            'Producto' => 'Producto',
+            'Servicio' => 'Servicio'
+        ];
+
+        return view('sales.create', compact('types'));
     }
 
     /**
@@ -91,7 +132,12 @@ class SaleController extends Controller
     {
         $sale = $this->sale->findOrFail($id);
 
-        return view('sales.edit', compact('sale'));
+        $types = [
+            'Producto' => 'Producto',
+            'Servicio' => 'Servicio'
+        ];
+
+        return view('sales.edit', compact('sale', 'types'));
     }
 
     /**
